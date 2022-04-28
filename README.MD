@@ -1,6 +1,6 @@
 # API NODE - REPOSITORIOS GITHUB
 
-## API para buscar repositorios de uma organização no Github
+## API (NodeJS) para buscar repositórios de uma organização no Github
 
 ### API desenvolvida em NodeJS utilizando Express e Node Fetch
 

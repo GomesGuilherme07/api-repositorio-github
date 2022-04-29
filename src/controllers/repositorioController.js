@@ -9,37 +9,22 @@ class RepositorioController{
 
             const baseURL = 'https://api.github.com/orgs/takenet/repos';
 
-            const response = await fetch(baseURL);
+            const response = await fetch(baseURL);           
             
-            let data = await response.json();                        
-
+            let data = await response.json();                     
 
             data = this.filtrarLinguagem(data);
+            data = this.mapearObjetoRetorno(data); 
+            data = this.definirTamanho(data);                      
             
-            let list = [];
-    
-            for(let i in data){
-                list.push(
-                    [
-                        {
-                            "name": data[i].name,
-                            "language": data[i].language,
-                            "description": data[i].description,
-                            "created_at": data[i].created_at,
-                            "html_url": data[i].html_url
-                        }
-                    ]
-                );
-            }      
-            
-            let respositorios = list.slice(0, 5);
-            
-            console.log(respositorios);
-            res.status(200).send(respositorios);
+            console.log(`Repositórios retornardos`);
+            res.status(response.status).send(data);
     
         }catch(error){
+
             console.log('Error - ', error)
             res.status(500).send("Erro na requisição");
+
         }
             
     }
@@ -53,9 +38,32 @@ class RepositorioController{
         return filter;
     }
 
-    // static mapearObjetoRetorno(data){
-        
-    // }
+    static mapearObjetoRetorno(data){
+
+        let list = [];
+    
+            for(let i in data){
+
+                list.push(
+                    [   
+                        {
+                            "name": data[i].name,
+                            "language": data[i].language,
+                            "description": data[i].description,
+                            "created_at": data[i].created_at,
+                            "html_url": data[i].html_url
+                        }
+                    ]
+                );
+            }  
+            
+            return list;
+    }
+
+    static definirTamanho(data){
+        let respositorios = data.slice(0, 5);
+        return respositorios;
+    }
     
 }
 

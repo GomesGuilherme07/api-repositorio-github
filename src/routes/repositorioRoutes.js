@@ -4,7 +4,7 @@ import RepositorioController from "../controllers/repositorioController.js";
 const router = express.Router();
 
 router
-    .get("/repositorios", RepositorioController.searchRepositorios)
+    .get("/repositorios", RepositorioController.searchRepositorios)    
 
 
 export default router;
